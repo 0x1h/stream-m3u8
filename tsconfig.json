@@ -1,0 +1,3 @@
+{
+  "extends": "@stream-m3u8/typescript-config/base.json"
+}
