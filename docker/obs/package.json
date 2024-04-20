@@ -6,7 +6,8 @@
   "scripts": {
     "start": "npx tsx index.ts",
     "docker:build": "docker-compose build",
-    "docker:up": "docker-compose up"
+    "docker:up": "docker-compose up",
+    "prisma:generate": "prisma generate"
   },
   "devDependencies": {
     "@types/express": "^4.17.21",
@@ -14,8 +15,10 @@
     "typescript": "^5.0.0"
   },
   "dependencies": {
+    "@prisma/client": "5.12.1",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
+    "prisma": "^5.12.1",
     "tsx": "^4.7.2"
   }
 }

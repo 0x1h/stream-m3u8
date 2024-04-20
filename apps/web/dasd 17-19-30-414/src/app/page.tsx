@@ -1,9 +1,9 @@
-import prisma from "@/util/db";
+import { TestingApi } from "./_components/testing-api";
 
 async function Page() {
   return (
     <main>
-      <h1 className="text-red-500">Hello</h1>
+      <TestingApi />
     </main>
   );
 }
