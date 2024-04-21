@@ -10,7 +10,8 @@
   },
   "scripts": {
     "db:generate": "prisma generate",
-    "db:push": "prisma db push --skip-generate"
+    "db:push": "prisma db push --skip-generate",
+    "build": "prisma migrate dev && prisma db push && prisma generate"
   },
   "peerDependencies": {
     "typescript": "^5.0.0"
