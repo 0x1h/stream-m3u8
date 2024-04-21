@@ -5,12 +5,17 @@ import { Navbar } from "@/components/shared/navbar";
 import { Providers } from "@/components/shared/providers";
 import { Popups } from "@/components/shared/popups";
 import { Progressbar } from "@/components/shared/progressbar";
+import type { Metadata, Viewport } from "next";
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "stream-m3u8",
   description:
     "streaming service using third-party applications obs, streamlabs...",
   icons: [{ rel: "icon", url: "/favicon.ico" }],
+};
+
+export const viewport: Viewport = {
+  themeColor: "#6d28d9",
 };
 
 export default function RootLayout({
