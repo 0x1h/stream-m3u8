@@ -1,2 +1,9 @@
 /** @type {import('tailwindcss').Config} */
-module.exports = require("@stream-m3u8/ui/tailwind.config");
+
+const config = require("@stream-m3u8/ui/tailwind.config")
+
+module.exports = {
+  ...config,
+  content: [
+    "./**/*.{ts,tsx}",
+  ],};

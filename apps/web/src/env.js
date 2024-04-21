@@ -14,10 +14,18 @@ export const env = createEnv({
       (str) => process.env.VERCEL_URL ?? str,
       process.env.VERCEL ? z.string() : z.string().url(),
     ),
+    GOOGLE_CLIENT_ID: z.string(),
+    GOOGLE_SECRET: z.string(),
+    TWITCH_CLIENT_ID: z.string(),
+    TWITCH_SECRET: z.string(),
   },
 
   client: {},
   runtimeEnv: {
+    TWITCH_SECRET: process.env.TWITCH_SECRET,
+    TWITCH_CLIENT_ID: process.env.TWITCH_CLIENT_ID,
+    GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID,
+    GOOGLE_SECRET: process.env.GOOGLE_SECRET,
     NODE_ENV: process.env.NODE_ENV,
     NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET,
     NEXTAUTH_URL: process.env.NEXTAUTH_URL,
