@@ -13,7 +13,7 @@ import { Check, Copy, Eye } from "lucide-react";
 import { useSession } from "next-auth/react";
 import { useState } from "react";
 
-const RTMP_SERVER = "rtmp://localhost:3000/live" as const;
+const RTMP_SERVER = "rtmp://localhost:1935/live" as const;
 
 const CredentialsDialog = () => {
   const [server, setServer] = useState({ copy: false });
@@ -50,33 +50,8 @@ const CredentialsDialog = () => {
         <DialogTitle className="uppercase">credentials</DialogTitle>
         <DialogDescription>
           <p className="mt-3">
-            Here is useful links to configure your streaming softwares:
-            <Button variant={"link"} asChild className="ml-1 px-0">
-              <a
-                href="https://streamlabs.com/content-hub/post/how-to-stream-new-platform-custom-ingest"
-                target="_blank"
-              >
-                Streamlabs
-              </a>
-            </Button>
-            ,
-            <Button variant={"link"} asChild className="px-0">
-              <a
-                href="https://service.streamboxy.com/support/solutions/articles/50000091089-rtmp-livestream-with-obs-studio"
-                target="_blank"
-              >
-                OBS
-              </a>
-            </Button>
-            ,
-            <Button variant={"link"} asChild className="px-0">
-              <a
-                href="https://support.restream.io/en/articles/369436-stream-to-a-custom-rtmp-channel"
-                target="_blank"
-              >
-                Restream
-              </a>
-            </Button>
+            Please input your credentials in the custom stream settings of your
+            streaming software
           </p>
           <div className="mb-3 mt-3 space-y-3">
             <div>

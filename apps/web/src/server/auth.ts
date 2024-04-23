@@ -38,9 +38,8 @@ export const authOptions: NextAuthOptions = {
       };
     },
     jwt: ({ token, session }) => {
-      if (session.streamKey) {
-        token.streamKey = session.streamKey;
-      }
+      token.streamKey = session.streamKey;
+      token.id = session.id;
 
       return token;
     },

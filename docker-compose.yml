@@ -11,5 +11,8 @@ services:
   obs:
     build: "./docker/obs"
     container_name: obs_server
-    volumes: 
-      - ./packages/prisma-schema:/app/prisma-schema
+    environment:
+      - DATABASE_URL=postgresql://callmenikk:1234@host.docker.internal:9900/stritch
+      - NEXTAUTH_SECRET=iknasd*8sda7HUJAD7sda
+    ports:
+      - "9901:9900"

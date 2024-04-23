@@ -1,12 +1,31 @@
+'use client'
 import { Button } from "@/ui/button";
 import { Dialog, DialogTrigger } from "@/ui/dialog";
 import { Key } from "lucide-react";
 import dynamic from "next/dynamic";
+import { useEffect, useState } from "react";
 const CredentialsDialog = dynamic(
   () => import("@/components/shared/dialogs/credentials"),
 );
 
 export const CredentialsAlert = () => {
+  const [accept, setAccept] = useState(true);
+
+  useEffect(() => {
+    const credentialsStorage = localStorage.getItem("credentials-install");
+
+    if (!credentialsStorage) {
+      setAccept(false);
+    }
+  }, []);
+
+  const acceptWarn = () => {
+    setAccept(true);
+    localStorage.setItem("credentials-install", "true");
+  };
+
+  if (accept) return;
+
   return (
     <div className="mb-3 rounded-md border border-yellow-400 bg-yellow-400/10 p-3 text-yellow-400">
       <div className="flex items-center">
@@ -19,6 +38,7 @@ export const CredentialsAlert = () => {
         <Button
           size={"sm"}
           variant={"link"}
+          onClick={acceptWarn}
           className=" ml-auto text-yellow-400"
         >
           Yup

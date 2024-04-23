@@ -46,6 +46,7 @@ model User {
   streamKey     String    @unique @default(cuid())
   accounts      Account[]
   sessions      Session[]
+  Stream        Stream[]
 
   @@map("users")
 }
@@ -57,4 +58,14 @@ model VerificationToken {
 
   @@unique([identifier, token])
   @@map("verificationtokens")
+}
+
+model Stream {
+  id          String  @id @default(cuid())
+  title       String?
+  description String?
+  live        Boolean @default(false)
+  user        User    @relation(fields: [userId], references: [id])
+  key         String  @unique
+  userId      String
 }

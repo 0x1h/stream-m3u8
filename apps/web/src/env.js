@@ -20,8 +20,11 @@ export const env = createEnv({
     TWITCH_SECRET: z.string(),
   },
 
-  client: {},
+  client: {
+    NEXT_PUBLIC_SOCKET: z.string(),
+  },
   runtimeEnv: {
+    NEXT_PUBLIC_SOCKET: process.env.NEXT_PUBLIC_SOCKET,
     TWITCH_SECRET: process.env.TWITCH_SECRET,
     TWITCH_CLIENT_ID: process.env.TWITCH_CLIENT_ID,
     GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID,
