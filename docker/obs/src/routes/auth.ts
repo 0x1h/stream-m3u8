@@ -3,7 +3,7 @@ import { prisma } from "..";
 
 const router = Router();
 
-router.post("/auth", async (req, res) => {
+router.post("/auth", async (req, res) => {  
   try {
     const { key: streamKey, name } = req.body;
 
@@ -24,7 +24,17 @@ router.post("/auth", async (req, res) => {
       return;
     }
 
-    await prisma.stream.create({ data: { userId: findName.id, key: streamKey} });
+    const isStreamStartedAlready = await prisma.stream.findUnique({
+      where: { key: streamKey },
+    });
+
+    if (isStreamStartedAlready) {
+      await prisma.stream.delete({ where: { key: streamKey } });
+    }
+
+    await prisma.stream.create({
+      data: { userId: findName.id, key: streamKey },
+    });
 
     return res.status(200).send();
   } catch (error) {

@@ -1,7 +1,6 @@
 "use client";
 import { GoogleIcon } from "@/icons/google";
 import { TwitchIcon } from "@/icons/twitch";
-import { Loader2 } from "lucide-react";
 import { Button } from "@/ui/button";
 import {
   DialogContent,
@@ -12,6 +11,7 @@ import {
 } from "@/ui/dialog";
 import { useState } from "react";
 import { signIn } from "next-auth/react";
+import { LoaderIcon } from "@/icons/loader";
 
 const AuthDialog = () => {
   const [loading, setLoading] = useState<"twitch" | "google" | "">("");
@@ -37,7 +37,7 @@ const AuthDialog = () => {
               }}
             >
               {loading === "google" ? (
-                <Loader2 size={20} className="animate-spin" />
+                <LoaderIcon className="size-4 animate-spin" />
               ) : (
                 <GoogleIcon />
               )}
@@ -53,7 +53,7 @@ const AuthDialog = () => {
               }}
             >
               {loading === "twitch" ? (
-                <Loader2 size={20} className="animate-spin" />
+                <LoaderIcon className="size-4 animate-spin" />
               ) : (
                 <TwitchIcon />
               )}

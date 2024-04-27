@@ -1,6 +1,6 @@
 import { socket } from "@/utils/io";
 import { useEffect, useState } from "react";
-import { useLaunchable } from "./laucnhable";
+import { useLaunchable } from "./launchable";
 
 export const usePollStream = (key: string) => {
   const [isConnected, setIsConnected] = useState(socket.connected);
@@ -32,7 +32,11 @@ export const usePollStream = (key: string) => {
 
     const receivePollStream = (username: string) => {
       setStreamingStarted(username);
-      setLaunchbale(false);
+      if (username !== "[ENDED]" && username) {
+        setLaunchbale(false);
+      } else {
+        setLaunchbale(true);
+      }
     };
 
     const closePollStream = () => {

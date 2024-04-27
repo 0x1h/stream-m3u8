@@ -22,8 +22,10 @@ export const env = createEnv({
 
   client: {
     NEXT_PUBLIC_SOCKET: z.string(),
+    NEXT_PUBLIC_RTMP_SERVER: z.string()
   },
   runtimeEnv: {
+    NEXT_PUBLIC_RTMP_SERVER: process.env.NEXT_PUBLIC_RTMP_SERVER,
     NEXT_PUBLIC_SOCKET: process.env.NEXT_PUBLIC_SOCKET,
     TWITCH_SECRET: process.env.TWITCH_SECRET,
     TWITCH_CLIENT_ID: process.env.TWITCH_CLIENT_ID,

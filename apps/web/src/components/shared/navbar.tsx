@@ -1,5 +1,4 @@
 "use client";
-import { Key, LogOut, Radio } from "lucide-react";
 import { Button } from "@/ui/button";
 import Image from "next/image";
 import { signOut, useSession } from "next-auth/react";
@@ -23,6 +22,9 @@ const CredentialsDialog = dynamic(
 );
 import { Dialog, DialogTrigger } from "@/ui/dialog";
 import { useState } from "react";
+import { LogoutIcon } from "@/icons/log-out";
+import { KeyIcon } from "@/icons/key";
+import { LiveIcon } from "@/icons/live";
 
 export const Navbar = () => {
   const { data: session, status } = useSession();
@@ -33,11 +35,12 @@ export const Navbar = () => {
       <div className="container flex items-center justify-between py-3">
         <Link href="/">
           <Image
+            draggable="false"
             src="/icon.webp"
             width={40}
             height={40}
             alt="icon"
-            className="cursor-pointer"
+            className="h-auto w-auto cursor-pointer"
           />
         </Link>
         <div className="flex items-center gap-3">
@@ -47,7 +50,7 @@ export const Navbar = () => {
                 <TooltipTrigger asChild>
                   <Link href="/stream">
                     <Button size={"icon"} variant={"secondary"}>
-                      <Radio size={18} />
+                      <LiveIcon className="size-4" />
                     </Button>
                   </Link>
                 </TooltipTrigger>
@@ -68,7 +71,7 @@ export const Navbar = () => {
                 {session?.user.image ? (
                   <Image
                     src={session?.user.image as string}
-                    alt={session?.user.name || "name"}
+                    alt={session?.user.name ?? "name"}
                     width={40}
                     height={40}
                     className="cursor-pointer rounded-full"
@@ -82,14 +85,14 @@ export const Navbar = () => {
                   className="flex items-center gap-3"
                   onClick={() => setOpenCreds(true)}
                 >
-                  <Key size={15} />
+                  <KeyIcon className="size-4" />
                   <span>Credentials</span>
                 </DropdownMenuItem>
                 <DropdownMenuItem
                   className="flex items-center gap-3 text-red-500 hover:bg-red-500/15"
                   onClick={async () => await signOut()}
                 >
-                  <LogOut size={15} />
+                  <LogoutIcon className="size-4 text-red-500" />
                   <span>Log out</span>
                 </DropdownMenuItem>
               </DropdownMenuContent>

@@ -1,4 +1,8 @@
 "use client";
+import { env } from "@/env";
+import { CopyIcon } from "@/icons/copy";
+import { EyeIcon } from "@/icons/eye";
+import { TickIcon } from "@/icons/tick";
 import { Button } from "@/ui/button";
 import {
   DialogClose,
@@ -9,11 +13,8 @@ import {
 } from "@/ui/dialog";
 import { Input } from "@/ui/input";
 import { Label } from "@/ui/label";
-import { Check, Copy, Eye } from "lucide-react";
 import { useSession } from "next-auth/react";
 import { useState } from "react";
-
-const RTMP_SERVER = "rtmp://localhost:1935/live" as const;
 
 const CredentialsDialog = () => {
   const [server, setServer] = useState({ copy: false });
@@ -23,7 +24,7 @@ const CredentialsDialog = () => {
   const onChange = (key: "server" | "streamkey", value: "show" | "copy") => {
     if (key === "server") {
       setServer((prev) => ({ ...prev, [value]: true }));
-      navigator.clipboard.writeText(RTMP_SERVER);
+      navigator.clipboard.writeText(env.NEXT_PUBLIC_RTMP_SERVER);
       setTimeout(() => {
         setServer((prev) => ({ ...prev, [value]: false }));
       }, 1000);
@@ -48,27 +49,27 @@ const CredentialsDialog = () => {
     <DialogContent>
       <DialogHeader>
         <DialogTitle className="uppercase">credentials</DialogTitle>
-        <DialogDescription>
-          <p className="mt-3">
+        <div>
+          <DialogDescription className="mt-3">
             Please input your credentials in the custom stream settings of your
             streaming software
-          </p>
+          </DialogDescription>
           <div className="mb-3 mt-3 space-y-3">
             <div>
               <Label className="uppercase">server</Label>
               <div className="relative flex items-center">
-                <Input value={RTMP_SERVER} readOnly className="pr-10" />
+                <Input
+                  value={env.NEXT_PUBLIC_RTMP_SERVER}
+                  readOnly
+                  className="pr-10"
+                />
                 {!server.copy ? (
-                  <Copy
-                    className="absolute right-4 cursor-pointer"
-                    size={15}
+                  <CopyIcon
+                    className="absolute right-4 size-4 cursor-pointer"
                     onClick={() => onChange("server", "copy")}
                   />
                 ) : (
-                  <Check
-                    className="absolute right-4 text-green-500"
-                    size={15}
-                  />
+                  <TickIcon className="absolute right-4 size-4 text-green-500" />
                 )}
               </div>
             </div>
@@ -84,27 +85,22 @@ const CredentialsDialog = () => {
                       : `${session?.user.name}?key=${session?.user.streamKey}`
                   }
                 />
-                <Eye
-                  className="absolute right-4 cursor-pointer"
-                  size={15}
+                <EyeIcon
+                  className="absolute right-4 size-4 cursor-pointer"
                   onClick={() => onChange("streamkey", "show")}
                 />
                 {!streamKey.copy ? (
-                  <Copy
-                    className="absolute right-10 cursor-pointer"
-                    size={15}
+                  <CopyIcon
+                    className="absolute right-10 size-4 cursor-pointer"
                     onClick={() => onChange("streamkey", "copy")}
                   />
                 ) : (
-                  <Check
-                    className="absolute right-10 text-green-500"
-                    size={15}
-                  />
+                  <TickIcon className="absolute right-10 size-4 text-green-500" />
                 )}
               </div>
             </div>
           </div>
-        </DialogDescription>
+        </div>
         <DialogClose asChild>
           <Button variant={"white"}>Got it</Button>
         </DialogClose>

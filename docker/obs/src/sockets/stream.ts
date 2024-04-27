@@ -1,6 +1,5 @@
 import { Socket } from "socket.io";
 import { io as IO, prisma } from "..";
-import { PrismaClient } from "@prisma/client";
 
 export const streamSocket = (socket: Socket, io: typeof IO) => {
   socket.on("stream", (id) => {
@@ -14,6 +13,8 @@ export const streamSocket = (socket: Socket, io: typeof IO) => {
 
       if (stream) {
         io.to(`stream:${id}`).emit(`stream:${id}`, stream.user.name);
+      } else {
+        io.to(`stream:${id}`).emit(`stream:${id}`, "[ENDED]");
       }
     }, 2000);
 

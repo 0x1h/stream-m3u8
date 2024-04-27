@@ -14,5 +14,7 @@ services:
     environment:
       - DATABASE_URL=postgresql://callmenikk:1234@host.docker.internal:9900/stritch
       - NEXTAUTH_SECRET=iknasd*8sda7HUJAD7sda
+      - ORIGIN_CORS=http://localhost:3000
     ports:
+      - "8000:8000"
       - "9901:9900"

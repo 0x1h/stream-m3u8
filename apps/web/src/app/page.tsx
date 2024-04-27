@@ -3,13 +3,13 @@ import { Button } from "@/ui/button";
 import dynamic from "next/dynamic";
 const AuthDialog = dynamic(() => import("@/components/shared/dialogs/auth"));
 import { Dialog, DialogTrigger } from "@/ui/dialog";
-import { Ghost } from "lucide-react";
 import Link from "next/link";
 import { db } from "@/server/db";
 import {
   StreamCard,
   StreamCardProps,
 } from "@/components/pages/home/stream-card";
+import { VideoOffIcon } from "@/icons/video-off";
 
 export default async function Home() {
   const session = await getServerAuthSession();
@@ -32,8 +32,9 @@ export default async function Home() {
         </div>
       ) : (
         <div className="mt-12 flex flex-col items-center justify-center gap-3">
-          <Ghost size={130} />
-          <p>Seems like no one is streaming yet, be first and stream</p>
+          <VideoOffIcon className="size-20 text-zinc-300" />
+
+          <p className="text-center">Seems like no one is streaming yet, be first and stream</p>
           {session?.user ? (
             <Link href="/stream">
               <Button>Start Streaming</Button>

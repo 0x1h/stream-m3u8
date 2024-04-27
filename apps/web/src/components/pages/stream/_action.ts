@@ -11,8 +11,8 @@ export const startStream = async (form: FormData, key: string) => {
     where: { key },
     data: {
       live: true,
-      title: title || "Untitled stream",
-      description: description || "",
+      title: title ?? "Untitled stream",
+      description: description ?? "",
     },
   });
 

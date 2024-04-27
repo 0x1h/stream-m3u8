@@ -4,11 +4,12 @@ import { Textarea } from "@/ui/textarea";
 import { Label } from "@/ui/label";
 import { StreamThumbnail } from "./thumbnail";
 import { Button } from "@/ui/button";
-import { Loader2, Rocket } from "lucide-react";
 import { Session } from "next-auth";
-import { useLaunchable } from "@/hooks/laucnhable";
+import { useLaunchable } from "@/hooks/launchable";
 import { startStream } from "./_action";
 import { useState } from "react";
+import { RocketIcon } from "@/icons/rocket";
+import { LoaderIcon } from "@/icons/loader";
 
 export const StreamForm = ({ session }: { session: Session }) => {
   const { launchable } = useLaunchable();
@@ -45,12 +46,12 @@ export const StreamForm = ({ session }: { session: Session }) => {
       >
         {!loading ? (
           <>
-            <Rocket size={15} />
+            <RocketIcon className="size-4" />
             <span>launch stream</span>
           </>
         ) : (
           <>
-            <Loader2 size={15} className="animate-spin"/>
+            <LoaderIcon className="size-4 animate-spin" />
             <span>starting</span>
           </>
         )}

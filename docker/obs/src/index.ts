@@ -7,14 +7,19 @@ import auth from "./routes/auth";
 import end from "./routes/end";
 import { PrismaClient } from "@prisma/client";
 import http from "http";
+import cors from "cors";
 import { streamSocket } from "./sockets/stream";
 
 const app = express();
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(cors())
+
 export const prisma = new PrismaClient();
 const server = http.createServer(app);
 export const io = new Server(server, {
   cors: {
-    origin: "http://localhost:3000",
+    origin: "*",
   },
 });
 
@@ -22,8 +27,6 @@ io.on("connection", (socket) => {
   streamSocket(socket, io);
 });
 
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
 
 app.use("/", auth);
 app.use("/", end);

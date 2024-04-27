@@ -1,7 +1,9 @@
 FROM node
 WORKDIR /usr/src/app
-COPY package.json package.json ./
+EXPOSE 8000
+COPY package.json ./
 COPY src ./src
 COPY prisma ./prisma
-RUN npm i && npx prisma generate
+RUN npm install
+RUN npx prisma generate
 CMD [ "npm", "start" ]
